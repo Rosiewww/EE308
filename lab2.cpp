@@ -116,4 +116,33 @@ void cal_keyword()
 	printf ("total num: %d\n",total);	
 }
 
-
+//Find several groups of switch-case structures and print them
+void cal_case_find()
+{
+ 	size_t switch_position = str.find(key_word[25]); 
+	size_t case_position;
+	int switch_num = 0;
+	int case_num[100] = {0};
+	while ( switch_position != str.npos )
+	{
+		switch_num ++;
+		case_position = str.find(key_word[2],switch_position);
+		while ( case_position != str.npos )
+		{
+			case_num[switch_num-1] ++;
+			case_position = str.find(key_word[2],case_position+1);
+		}
+		switch_position = str.find(key_word[25],switch_position+1);
+	}
+	for (int i=0;i < switch_num-1;i++ )
+	{
+		case_num[i] -= case_num[i+1];
+	}
+	cout << "switch num: " << switch_num << endl;
+	cout << "case num: ";
+	for ( int i=0; i<switch_num; i++)
+	{
+		cout << case_num[i] << " ";
+	}
+	cout << endl;
+} 
