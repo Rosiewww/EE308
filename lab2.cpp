@@ -33,7 +33,7 @@ int main()
 	if(!file.is_open())//is_open returns a Boolean type to determine whether it opened successfully
 	{
 		cout<<"File opening failure"<<endl;
-		return;
+		return 0;
 	}
 	
 	string temp;
@@ -56,7 +56,7 @@ int main()
 		if (level > 2)
 		{
 			//Introduce a function that finds the number of if-else structures
-			if_else_find( level );
+			cal_if_else(level);
 		}  
 	}
 	file.close();  
@@ -113,11 +113,11 @@ void cal_keyword()
 		}
 		t_num += count;
 	}
-	printf ("total num: %d\n",total);	
+	printf ("total num: %d\n",t_num);	
 }
 
 //Find several groups of switch-case structures and print them
-void cal_case_find()
+void cal_switch_case()
 {
  	size_t switch_position = str.find(key_word[25]); 
 	size_t case_position;
@@ -146,3 +146,5 @@ void cal_case_find()
 	}
 	cout << endl;
 } 
+
+
