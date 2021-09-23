@@ -13,7 +13,7 @@ string key_word[32] =
 };
 
 //Function declaration
-void Pretreatment(); //Preprocessing the text
+void pretreatment(); //Preprocessing the text
 void cal_keyword(); //Find and evaluate the number of keywords
 void cal_switch_case(); //Find and evaluate the number of 'switch_case' structure
 void cal_if_else(int input_level); //Find and evaluate the number of 'if_else' structure
@@ -43,7 +43,25 @@ int main()
 		str = str + temp + '\n';
 	}
 	
-	file.close(); //¹Ø±ÕÎÄ¼þ 
+	//Introducing preprocessor functions
+	pretreatment();
+	
+	//Introduce keyword statistics functions
+	cal_keyword();
+	
+	if (level > 1)
+	{
+	 	//Introduces the function that find switch-case structures.
+		cal_switch_case();
+		if (level > 2)
+		{
+			//Introduce a function that finds the number of if-else structures
+			if_else_find( level );
+		}  
+	}
+	file.close();  
 	return 0;
 }
+
+	 
 
