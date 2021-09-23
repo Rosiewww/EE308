@@ -147,4 +147,59 @@ void cal_switch_case()
 	cout << endl;
 } 
 
+//Find the number of if-else and if-elseif-else constructs
+void cal_if_else(int input_level)
+{
+	int c[100] = {0};
+	int head = 0,ebp = 0;
+	int if_else = 0,if_elseif_else = 0;
+	size_t if_position = str.find(key_word[15]);
+	if (if_position != str.npos )
+	{
+		c[ebp] = 1;
+		ebp ++;
+		for ( int i = if_position+1; i < (int)str.length(); i++ )
+		{
+			if (str.compare(i,7,"else if") == 0)
+			{
+				c[ebp] = 2;
+				ebp ++;
+				i += 7;
+			}
+			else if (str.compare(i,2,"if") == 0 )
+			{
+				c[ebp] = 1;
+				ebp ++;
+				i += 2;
+			}
+			else if (str.compare(i,4,"else") == 0)
+			{
+				int j = ebp-1;
+				if (c[j] != 1 && c[j] == 2)
+				{
+					while (c[j] != 1)
+					{
+						j--;
+					}
+					int ebp_1 = j;
+					for (j; j<ebp; j++)
+					{
+						c[j] = 0;
+					}
+					ebp = ebp_1;
+					if_elseif_else ++;
+				}
+				else if (c[j] == 1)
+				{
+					if_else ++;
+					c[j] = 0;
+					ebp = j;
+				}
+				i += 4;				
+			}
 
+		}
+	}
+	if (input_level >= 3) cout << "if-else num: " << if_else << endl;
+	if (input_level == 4)	cout << "if-elseif-else num: " << if_elseif_else << endl;
+}
