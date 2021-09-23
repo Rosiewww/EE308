@@ -63,5 +63,57 @@ int main()
 	return 0;
 }
 
-	 
+//Delete the comment part of the file and process the file	 
+void pretreatment()
+{
+	for (int i=0,j=i; i<(int)str.length(); i++ )
+	{
+		if (str[i]=='/' && str[i+1]=='/' )
+		{
+			j = i;
+			while ( str[j] != '\n' )
+			{
+				j ++;
+			}
+			str.erase(i,j-i+1);
+		}
+		if (str[i]=='/' && str[i+1]=='*' )
+		{
+			j = i + 2;
+			while ( str[j] != '*' )
+			{
+				j ++;
+			}
+			str.erase(i,j+2-i);
+		}
+		if ( str[i]=='"')
+		{
+			j = i+1;
+			while (str[j] != '"' )
+			{
+				j ++;
+			}
+			str.erase(i,j-i+1);
+		}
+	}
+}
+
+//Check the keyword table to find the number of keywords in the file and return
+void cal_keyword()
+{
+	int t_num=0;
+	for (int i=0;i<32;i++)
+	{
+		int count = 0;
+		size_t position = str.find(key_word[i]);
+		while ( position != str.npos )
+		{
+			count ++;
+			position = str.find(key_word[i],position+1);
+		}
+		t_num += count;
+	}
+	printf ("total num: %d\n",total);	
+}
+
 
